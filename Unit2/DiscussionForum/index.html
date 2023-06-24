@@ -96,9 +96,9 @@
       var geometry = new THREE.BoxGeometry(1, 1, 1);
 
       // Create a material
-      var material = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        wireframe: true,
+      var material = new THREE.MeshLambertMaterial({
+        color: "lime",
+        transparent: false,
       });
 
       // Create a cube mesh
@@ -108,9 +108,17 @@
       scene.add(cube);
 
       // Light
-      const ambientLight = new THREE.AmbientLight("white", 5);
+      const ambientLight = new THREE.AmbientLight(0x666666, 5);
       ambientLight.position.set(10, 10, 10);
       scene.add(ambientLight);
+
+      const dirLight = new THREE.SpotLight(0xaaaaaa);
+      dirLight.position.set(5, 12, 8);
+      scene.add(dirLight);
+
+      const dirLight2 = new THREE.SpotLight(0xaaaaaa);
+      dirLight2.position.set(-5, -12, -8);
+      scene.add(dirLight2);
 
       // Orbit controls
       var cameraControls = new OrbitControls(camera, renderer.domElement);
