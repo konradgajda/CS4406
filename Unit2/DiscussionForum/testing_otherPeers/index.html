@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>DF_2_Meshes_Three_JS</title>
+
+    <style>
+      body {
+        margin: 0;
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery. min.js"></script>
+
+    <script src="http://uopeopleweb.com/js/dat.gui.min.js"></script>
+
+    <script src="https://threejs.org/build/three.js"></script>
+
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>
+
+    <script src="http://uopeopleweb.com/js/math.js"></script>
+
+    <script src="http://uopeopleweb.com/js/Detector.js"></script>
+
+    <script type="text/javascript">
+      // Javascript goes here
+
+      // Setting up scene
+
+      var scene = new THREE.Scene();
+
+      // Setting up camera
+
+      var camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+
+      // Setting up rendering
+
+      var renderer = new THREE.WebGLRenderer();
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      document.body.appendChild(renderer.domElement);
+
+      // We are demonstrating meshes using the cylinder geometry
+
+      var geometry = new THREE.CylinderGeometry(6, 6, 10);
+
+      // Color red, show wireframe
+
+      var material = new THREE.MeshBasicMaterial({
+        color: "red",
+        wireframe: true,
+      });
+
+      // Class mesh combines both geometry and material
+
+      var cylinder = new THREE.Mesh(geometry, material);
+
+      // Adding the cylinder to the scene
+
+      scene.add(cylinder);
+
+      camera.position.z = 25;
+
+      // Rendering the scene, slow rotation
+
+      function render() {
+        requestAnimationFrame(render);
+
+        cylinder.rotation.x += 0.001;
+
+        cylinder.rotation.y += 0.001;
+
+        renderer.render(scene, camera);
+      }
+
+      render();
+    </script>
+  </body>
+</html>

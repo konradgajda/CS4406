@@ -1,55 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta
-      name="description"
-      content="CS4406 Computer Graphics - Assignment #2"
-    />
-    <meta charset="utf-8" />
-    <title>Assignment 2</title>
-    <style id="jsbin-css"></style>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
+import * as THREE from 'three';
+import * as THREE_ADDONS from 'three-addons';
+import * as DAT_GUI from 'dat.gui';
+import * as $ from 'jquery';
 
-  <script
-    async
-    src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"
-  ></script>
-
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.153.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.153.0/examples/jsm/"
-      }
-    }
-  </script>
-
-  <body>
-    <h3>Unit 2 - Polygons (Pentagon)</h3>
-    <div id="container"></div>
-    <p style="margin-top: 2rem">Addtional functionality:</p>
-    <ul>
-      <li>change the spin speed & direction using gui menu</li>
-      <li>change the color usign the gui menu</li>
-      <li>show wireframe</li>
-      <li>use mouse cursor & left button to control object rotation</li>
-      <li>use mouse cursor & right button to control object transformation</li>
-      <li>use mouse weel to zoom the scene</li>
-    </ul>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.2.1/math.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
-    <script type="module">
-      import * as THREE from "three";
-      import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
       // config
       const config = {
         scene: {
           width: 500,
           height: 500,
-          background: "0xffffff",
+          background: "#ffffff",
         },
         camera: {
           viewAngle: 45,
@@ -63,9 +23,7 @@
       };
 
       // create a WebGL renderer, camera, and a scene
-      if (webgl_support())
-        var renderer = new THREE.WebGLRenderer({ alpha: true });
-      else var renderer = new THREE.CanvasRenderer();
+      var renderer = new THREE.WebGLRenderer({ alpha: true });
 
       var scene = new THREE.Scene();
       var clock = new THREE.Clock();
@@ -87,7 +45,7 @@
 
       // start the renderer
       renderer.setSize(config.scene.width, config.scene.height);
-      renderer.setClearColor(config.scene.background, 1.0);
+      renderer.setClearColor(getThreeColor(config.scene.background), 1.0);
       document.body.appendChild(renderer.domElement);
 
       // get the element to attach
@@ -113,7 +71,7 @@
       // Create material
       var material = new THREE.MeshBasicMaterial({
         color: 0xff0000,
-        wireframe: poligonProperties.showVertrices,
+        wireframe: poligonProperties.showWireframe,
         side: THREE.DoubleSide,
       });
 
@@ -142,7 +100,7 @@
       scene.add(poligon);
 
       // GUI menu
-      const gui = new dat.GUI();
+      const gui = new DAT_GUI.GUI();
       gui.width = 355;
       const menuFolder = gui.addFolder("Menu");
       menuFolder.width = 350;
@@ -183,22 +141,15 @@
       });
 
       // Orbit controls
-      var cameraControls = new OrbitControls(camera, renderer.domElement);
+      var cameraControls = new THREE_ADDONS.OrbitControls(camera, renderer.domElement);
       cameraControls.addEventListener("mousemove", renderer);
       cameraControls.autoRotate = true;
 
-      // function checking if browser support WebGL
-      function webgl_support() {
-        try {
-          var canvas = document.createElement("canvas");
-          return (
-            !!window.WebGLRenderingContext &&
-            (canvas.getContext("webgl") ||
-              canvas.getContext("experimental-webgl"))
-          );
-        } catch (e) {
-          return false;
-        }
+
+      // get THREE color
+      function getThreeColor(value) {
+        var colorValue = parseInt(value.replace("#","0x"), 16);
+        return new THREE.Color(colorValue);
       }
 
       function render() {
@@ -222,6 +173,5 @@
       }
 
       animate();
-    </script>
-  </body>
-</html>
+
+
