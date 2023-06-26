@@ -1,0 +1,47 @@
+# Unit 2 - Discussion Forum
+
+Dear All,
+
+A mesh is a fundamental geometric structure that forms the foundation of most 3D models in computer graphics. It comprises vertices, edges, and faces, the essential elements that define the structure of any 3D model.
+
+2D illustration of vertex, edge, and face3D illustration of vertex, edge, and face
+
+Images 1 & 2 provided by Rex (2021) show mesh edges, vertices, and face(-s).
+
+Vertices are points in a 3D space, edges are the lines connecting two vertices, and faces are the polygons formed by a group of vertices, typically triangles or quadrilaterals.
+
+Meshes are utilized extensively in computer graphics due to their flexibility and power to represent complex 3D forms. For representing a landscape, a video game character, or a virtual catalog product, 3D models derived from meshes offer realistic visualization. A mesh can be implemented and rendered on the screen in a graphics API like WebGL, the foundation for libraries like three.js. WebGL enables rendering 2D and 3D graphics within any compatible web browser without plug-ins.
+
+According to Dirksen (2023), "A mesh describes the geometry of an object – that is, its shape – and contains information about the object's material. A mesh determines how the shape gets shown on screen through traits such as color, or whether the object is shiny or transparent (p. 52)."
+
+On the other hand, technically speaking and following the documentation of the Three.js, "Mesh is a class representing triangular polygon mesh based objects. Also serves as a base for other classes such as SkinnedMesh (three.js docs.,n.d.) ."
+
+Example of Mesh:
+GitHub (line 105): https://github.com/konradgajda/CS4406/blob/develop/Unit2/DiscussionForum/index.html
+
+The complete example under the above URL shows a JavaScript snippet setting up a scene using Three.js, defining a box geometry and material, and creating a mesh from them. It then adds the Mesh to the scene (Dirksen, 2023).
+
+Three.js allows more complex geometries and materials to create more complex shapes and objects, and combining multiple meshes is possible. However, the principle remains the same.
+
+It is worth mentioning that single Mesh supports multiple materials.
+
+Functions and attributes for meshes in Three.js
+
+Meshes support a range of attributes and functions:
+
+position >> determines position relative to the parent object in our case and, in most cases, scene
+rotation >> allows rotation in x, y, z
+scale >> it is self explanatory
+translateX(), translateY(), translateZ() >> allows moving object along axes
+lookAt() >> allow pointing the object to the vector in space
+castShadow >> if there is light on the object, it allows the casting of shadow
+
+In conclusion, meshes form the foundation of representing 3D objects in computer graphics. They allow us to visualize various objects, from simple geometric shapes to intricate 3D models, making them indispensable in computer graphics. Meshes support a range of functions and properties that allows manipulations of color, size, rotation, and, more significantly, simplifying working with
+
+Thank you for reading
+Konrad
+
+References:
+Dirksen, J. (2023). Learn Three. Js: Program 3D Animations and Visualizations for the Web with JavaScript and WebGL. Packt Publishing. Kindle Edition.
+Rex, J. (2021). Building User Experiences with Three.js. X-Team Blog - the Most-Loved Company for Engineers. https://x-team.com/blog/user-experience-threejs/
+three.js docs. (n.d.). https://threejs.org/docs/?q=Mesh#api/en/objects/Mesh
